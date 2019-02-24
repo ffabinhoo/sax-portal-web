@@ -61,7 +61,7 @@ researchRoutes.route('/update/:id').post(function(req, res){
             research.isEnabled = req.body.isEnabled;
             
             research.save().then(research => {
-                res.json('research updated');
+                res.json('research updated' + JSON.stringify(research));
             })
             .catch(err => {
                 res.status(400).send("update not possible");

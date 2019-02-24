@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+
 import axios from 'axios';
 
 export default class ResearchCreate extends Component {
@@ -63,6 +64,8 @@ export default class ResearchCreate extends Component {
         })
     }
 
+   
+
     render() {
         console.log(this.state.isEnabled)
         return (
@@ -116,6 +119,7 @@ export default class ResearchCreate extends Component {
                     </div>
                     <div className="form-group">
                         <input type="submit" value="Submit" className="btn btn-primary" />
+                        <input type="button" value="Back" className="btn btn"  />
                     </div>
                 </form>
             </div>
