@@ -7,10 +7,10 @@ const Research = props => (
         <td>{props.research.name}</td>
         <td>{props.research.description}</td>
         <td>{props.research.data}</td>
-        <td>{props.research.isEnabled}</td>
+        <td>"{JSON.stringify(props.research.isEnabled)}"</td>
         <td></td>
         <td>
-            <Link to={"researchers/"+props.research._id}>Edit</Link>
+            <Link to={"/edit/"+props.research._id}>Edit</Link>
         </td>
     </tr>
 )
