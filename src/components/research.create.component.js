@@ -52,7 +52,7 @@ export default class ResearchCreate extends Component {
             isEnabled: this.state.isEnabled
         }
 
-        axios.post('http://localhost:4000/researchers/add',newResearch)
+        axios.post('http://localhost:4000/researchers /add',newResearch)
             .then(res => console.log(res.data));
 
         this.setState({
