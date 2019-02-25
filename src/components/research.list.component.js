@@ -16,7 +16,7 @@ const Research = props => (
             <Link to={"/edit/"+props.research._id}>Edit</Link>
             
             &nbsp;&nbsp;&nbsp;&nbsp;
-            <button type="button" onClick={alert(this)}>
+            <button type="button" >
                 delete
             </button>
         </td>
