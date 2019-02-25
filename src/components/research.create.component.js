@@ -12,15 +12,19 @@ export default class ResearchCreate extends Component {
         this.onChangeResearchData = this.onChangeResearchData.bind(this);
         this.onChangeResearchEnabled = this.onChangeResearchEnabled.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.handleClick = this.handleClick.bind(this);
 
 
         this.state = {
             name: '',
             description: '',
             data: '',
-            isEnabled: "false"
+            isEnabled: false
         }
     }
+
+    message = false;
+    buttonDisable = false;
 
     onChangeResearchName(e) {
         this.setState({
@@ -62,6 +66,15 @@ export default class ResearchCreate extends Component {
             data: '',
             isEnabled: false
         })
+        this.message = true;
+        this.buttonDisable = true;
+    }
+
+    
+
+    handleClick(e){
+        //e.preventDefault();
+        this.props.history.push('/');
     }
 
    
@@ -71,6 +84,12 @@ export default class ResearchCreate extends Component {
         return (
             
             <div style={{marginTop: 20}}>
+            {this.message ? 
+                    <div className="alert alert-success" role="alert">
+                    Update With Success!!!
+                    </div>
+                 : ''
+            }
                 <h3>Form Research</h3>
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group">
@@ -106,20 +125,20 @@ export default class ResearchCreate extends Component {
                                     name="isEnabled" 
                                     value="true" 
                                     onChange={this.onChangeResearchEnabled} 
-                                    checked={this.state.isEnabled==="true"}  />
+                                    checked={this.state.isEnabled===true}  />
                             Yes
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             <input type="radio" 
                                     className="form-check-input" 
                                     name="isEnabled" value="false" 
                                     onChange={this.onChangeResearchEnabled} 
-                                    checked={this.state.isEnabled==="false"} />
+                                    checked={this.state.isEnabled===false} />
                             No
                         </div>
                     </div>
                     <div className="form-group">
-                        <input type="submit" value="Submit" className="btn btn-primary" />
-                        <input type="button" value="Back" className="btn btn"  />
+                        <input type="submit" value="Submit" className="btn btn-primary" disabled={this.buttonDisable} />
+                        <input type="button" value="Back" className="btn btn" onClick={this.handleClick} />
                     </div>
                 </form>
             </div>

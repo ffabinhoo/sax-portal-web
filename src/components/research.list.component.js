@@ -3,6 +3,7 @@ import * as React from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 
+
 const Research = props => (
     <tr>
         <td>{props.research.name}</td>
@@ -13,9 +14,16 @@ const Research = props => (
         <td  className={props.research.isEnabled ? 'isEnabled':'isDisabled'}>{JSON.stringify(props.research.isEnabled)}</td>
         <td>
             <Link to={"/edit/"+props.research._id}>Edit</Link>
+            
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <button type="button" onClick={alert(this)}>
+                delete
+            </button>
         </td>
     </tr>
 )
+
+
 
 function formatDate(date) {
     var d = new Date(date),
@@ -31,6 +39,7 @@ export default class ResearchList extends Component {
     constructor(props) {
         super(props);
         this.state = {researchers: []}
+        //this.goToEdit = this.goToEdit.bind(this);
     }
 
     componentDidMount() {
@@ -42,21 +51,11 @@ export default class ResearchList extends Component {
             console.log(error);
         });
     }
-    componentWillUnmount(){
-        this._isMounted = false;
-    }
 
-   /*  componentDidUpdate() {
-        axios.get('http://localhost:4000/researchers/')
-        .then(response => {
-            if(this._isMounted) {
-                this.setState({researchers: response.data})
-            }
-        })
-        .catch(function(error){
-            console.log(error);
-        });
-    } */
+    showModal = () => {
+        this.setState({ show: true });
+    };
+    
 
     researcherList(){
         return this.state.researchers.map(function(currentResearch, i){

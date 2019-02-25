@@ -22,6 +22,7 @@ export default class ResearchEdit extends Component {
         this.onChangeResearchData = this.onChangeResearchData.bind(this);
         this.onChangeResearchEnabled = this.onChangeResearchEnabled.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.handleClick = this.handleClick.bind(this);
 
         this.state = {
             name:'',
@@ -54,6 +55,11 @@ export default class ResearchEdit extends Component {
             isEnabled: e.target.value
         });
     }
+
+    handleClick(e){
+        this.props.history.push('/');
+    }
+
     onSubmit(e){
         e.preventDefault();
         
@@ -152,7 +158,7 @@ export default class ResearchEdit extends Component {
                     </div>
                     <div className="form-group">
                         <input type="submit" value="Update" className="btn btn-primary" />
-                        <input type="button" value="Back" className="btn btn"  />
+                        <input type="button" value="Back" className="btn btn" onClick={this.handleClick} />
                     </div>
                 </form>
             </div>
