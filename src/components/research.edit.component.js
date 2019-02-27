@@ -13,6 +13,15 @@ function formatDate(date) {
     return [year, month, day].join('-');
 }
 
+function str2bool(value) {
+    if (value && typeof value === Boolean) {
+      if (value.toLowerCase() === true) return "true";
+      if (value.toLowerCase() === false) return "false";
+    }
+    return value;
+ }
+
+
 export default class ResearchEdit extends Component {
 
     constructor(props) {
@@ -28,7 +37,7 @@ export default class ResearchEdit extends Component {
             name:'',
             description: '',
             data: '',
-            isEnabled: false
+            isEnabled: ''
         }
     }
 
@@ -77,12 +86,14 @@ export default class ResearchEdit extends Component {
             name: '',
             description: '',
             data: '',
-            isEnabled: false
+            isEnabled: ''
         });
         this.message = true;     
     }
 
     
+    
+
 
     componentDidMount(){
         axios.get('http://localhost:4000/researchers/'+this.props.match.params.id)
@@ -91,7 +102,7 @@ export default class ResearchEdit extends Component {
                     name: response.data.name,
                     description: response.data.description,
                     data: response.data.data,
-                    isEnabled: response.data.isEnabled
+                    isEnabled: str2bool(response.data.isEnabled)
                 })
             })
             .catch(function(error){
@@ -99,6 +110,7 @@ export default class ResearchEdit extends Component {
             })
     }
 
+    
 
 
     render() {
@@ -145,14 +157,15 @@ export default class ResearchEdit extends Component {
                                     name="isEnabled" 
                                     value="true" 
                                     onChange={this.onChangeResearchEnabled} 
-                                    checked={this.state.isEnabled===true}  />
+                                    checked={this.state.isEnabled==="true"}  />
                             Yes
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             <input type="radio" 
                                     className="form-check-input" 
-                                    name="isEnabled" value="false" 
+                                    name="isEnabled" 
+                                    value="false" 
                                     onChange={this.onChangeResearchEnabled} 
-                                    checked={this.state.isEnabled===false} />
+                                    checked={this.state.isEnabled==="false"} />
                             No
                         </div>
                     </div>

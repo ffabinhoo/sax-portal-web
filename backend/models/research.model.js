@@ -12,7 +12,7 @@ let Research = new Schema({
         type: Date
     },
     isEnabled: {
-        type: Boolean
+        type: String
     }
 
 

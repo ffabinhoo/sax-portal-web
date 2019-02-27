@@ -43,20 +43,39 @@ export default class Research extends Component {
     }
 
     render() {
-        return this.state.researchers.map(research => {
-            return( 
-                <tr key={research._id}>
-                    <td>{research.name}</td>
-                    <td>{research.description}</td>
-                    <td>{formatDate(research.data)}</td>
-                    <td  className={research.isEnabled ? 'isEnabled':'isDisabled'}>{JSON.stringify(research.isEnabled)}</td>
-                    <td>
-                        <Link to={"/edit/"+research._id}>Edit</Link>
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                        <button type="button" onClick={e => this.showModal(research)} >Delete</button>
-                    </td>
-                </tr>
-            )
-        })
-    }
+        return (
+          <React.Fragment>
+              <table className="table table-striped" style={{ marginTop: 20}}>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Data</th>
+                            <th>IsEnabled</th>
+                            <th> </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this.state.researchers.map(research => {
+                            return (
+                                <tr key={research._id}>
+                                <td>{research.name}</td>
+                                <td>{research.description}</td>
+                                <td>{formatDate(research.data)}</td>
+                                <td  className={research.isEnabled==="true" ? 'isEnabled':'isDisabled'}>{research.isEnabled}</td>
+                                <td>
+                                    <Link to={"/edit/"+research._id}>Edit</Link>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <button type="button" onClick={e => this.showModal(research)} >Delete</button>
+                                </td>
+                            </tr>
+                            )
+                        })}
+                    </tbody>
+                </table>
+          </React.Fragment>
+        );
+      }
+
+    
 }

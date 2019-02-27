@@ -19,7 +19,7 @@ export default class ResearchCreate extends Component {
             name: '',
             description: '',
             data: '',
-            isEnabled: false
+            isEnabled: ''
         }
     }
 
@@ -64,7 +64,7 @@ export default class ResearchCreate extends Component {
             name: '',
             description: '',
             data: '',
-            isEnabled: false
+            isEnabled: ''
         })
         this.message = true;
         this.buttonDisable = true;
@@ -125,14 +125,14 @@ export default class ResearchCreate extends Component {
                                     name="isEnabled" 
                                     value="true" 
                                     onChange={this.onChangeResearchEnabled} 
-                                    checked={this.state.isEnabled===true}  />
+                                    checked={this.state.isEnabled==="true"}  />
                             Yes
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             <input type="radio" 
                                     className="form-check-input" 
                                     name="isEnabled" value="false" 
                                     onChange={this.onChangeResearchEnabled} 
-                                    checked={this.state.isEnabled===false} />
+                                    checked={this.state.isEnabled==="false"} />
                             No
                         </div>
                     </div>
