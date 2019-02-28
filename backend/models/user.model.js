@@ -11,7 +11,7 @@ let User = new Schema({
     },
     
     password: {
-        type: Date
+        type: String
     },
 
 

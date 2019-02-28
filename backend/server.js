@@ -137,6 +137,17 @@ userRoutes.route('/update/:id').post(function(req, res){
     });
 });
 
+userRoutes.route('/delete/:id').post(function(req, res, next){
+    console.log(req.params.id);
+    User.findByIdAndRemove(req.params.id, (err, user) => {
+        if (err) { return next (err); }
+
+        if (!user) { res.status(404).json('No user with that ID'); }
+
+        res.status(200).json(user);
+    });
+});
+
 //------------------------------------------------------------------
 //------------------------------------------------------------------
 

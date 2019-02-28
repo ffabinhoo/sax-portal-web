@@ -9,19 +9,25 @@ export default class UserCreate extends Component {
         this.onChangeUserName = this.onChangeUserName.bind(this);
         this.onChangeUserLogin = this.onChangeUserLogin.bind(this);
         this.onChangeUserEnabled = this.onChangeUserEnabled.bind(this);
+        this.onChangeUserPassword = this.onChangeUserPassword.bind(this);
+        this.onChangeUserPasswordConfirm = this.onChangeUserPasswordConfirm.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.handleClick = this.handleClick.bind(this);
-
+        
 
         this.state = {
             name: '',
             login: '',
-            isEnabled: ''
+            password: '',
+            passwordConfirm: '',
+            isEnabled: '',
         }
     }
 
-    message = false;
+    
+    messageString = ' ';
     buttonDisable = false;
+    typeMessage = ' ';
 
     onChangeUserName(e) {
         this.setState({
@@ -33,11 +39,24 @@ export default class UserCreate extends Component {
             login: e.target.value
         });
     }
+
+    onChangeUserPassword(e)  {
+        this.setState({
+            password: e.target.value
+        });
+    }
+
+    onChangeUserPasswordConfirm (e){
+        this.setState({
+            passwordConfirm: e.target.value
+        });
+    }
     
     onChangeUserEnabled(e) {
         this.setState({
             isEnabled: e.target.value
         });
+        this.buttonDisable = false;
     }
     onSubmit(e){
         e.preventDefault();
@@ -45,33 +64,44 @@ export default class UserCreate extends Component {
         const newUser = {
             name: this.state.name,
             login: this.state.login,
+            password: this.state.password,
+            passwordConfirm: this.state.passwordConfirm,
             isEnabled: this.state.isEnabled
         }
-
-        axios.post('http://localhost:4000/users/add',newUser)
+        this.setState({
+           
+        });
+        
+        if (this.state.password ===this.state.passwordConfirm){
+            axios.post('http://localhost:4000/users/add',newUser)
             .then(res => console.log(res.data));
 
-        this.setState({
-            name: '',
-            login: '',
-            isEnabled: ''
-        })
-        this.message = true;
-        this.buttonDisable = true;
+            this.setState({
+                isEnabled: ''
+            });
+
+            this.messageString = 'created with success';
+            this.typeMessage = 'alert alert-success';
+            this.buttonDisable = true;
+        }else{
+            this.messageString = 'password confirmation not valid';
+            this.typeMessage = 'alert alert-danger';
+            this.buttonDisable = false;
+        }
+
     }
 
     handleClick(e){
-        this.props.history.push('/');
+        this.props.history.push('/user/list');
     }
 
     render() {
-        console.log(this.state.isEnabled)
         return (
             
             <div style={{marginTop: 20}}>
-            {this.message ? 
-                    <div className="alert alert-success" role="alert">
-                    Update With Success!!!
+            {this.messageString !== '' ? 
+                    <div className={this.typeMessage} role="alert">
+                        {this.messageString}
                     </div>
                  : ''
             }
@@ -87,10 +117,31 @@ export default class UserCreate extends Component {
                     </div>
                     <div className="form-group">
                         <label>Login: </label>
-                        <input type="text" multiple
+                        <input type="text" 
                                className="form-control"
                                value={this.state.login}
+                               name="password"
                                onChange={this.onChangeUserLogin}
+                               />
+                    </div>
+
+                    <div className="form-group">
+                        <label>Password: </label>
+                        <input type="password" 
+                               className="form-control"
+                               value={this.state.password}
+                               name="password"
+                               onChange={this.onChangeUserPassword}
+                               />
+                    </div>
+                    
+                    <div className="form-group">
+                        <label>Password confirm: </label>
+                        <input type="password" 
+                               className="form-control"
+                               value={this.state.passwordConfirm}
+                               name="passwordConfirm"
+                               onChange={this.onChangeUserPasswordConfirm}
                                />
                     </div>
                     
