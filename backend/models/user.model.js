@@ -1,26 +1,23 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-let Research = new Schema({
+let User = new Schema({
     name: {
         type: String
     },
     
-    description: {
+    login: {
         type: String
     },
     
-    data: {
+    password: {
         type: Date
     },
-    
-    link_shiny: {
-        type: String
-    },
+
 
     isEnabled: {
         type: String
     }
 });
 
-module.exports = mongoose.model('Research', Research);
+module.exports = mongoose.model('User', User);

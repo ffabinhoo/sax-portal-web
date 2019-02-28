@@ -64,7 +64,7 @@ export default class Research extends Component {
                                 <td>{formatDate(research.data)}</td>
                                 <td  className={research.isEnabled==="true" ? 'isEnabled':'isDisabled'}>{research.isEnabled}</td>
                                 <td>
-                                    <Link to={"/edit/"+research._id}>Edit</Link>
+                                    <Link to={"/research/edit/"+research._id}>Edit</Link>
                                     &nbsp;&nbsp;&nbsp;&nbsp;
                                     <button type="button" onClick={e => this.showModal(research)} >Delete</button>
                                 </td>
